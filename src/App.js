@@ -1,24 +1,42 @@
-import React, {useState} from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import Dexie from "dexie";
+
 import './App.css';
+
+const db = new Dexie("yawndb");
+db.version(1).stores({
+	tasks: "++id, data"
+})
 
 function App() {
 	const [field, setField] = useState("");
+	const [incoming, setIncoming] = useState("");
 
 	const doInput = e => {
 		setField(e.target.value)
-		console.log(e.target.value);
+		// console.log(e.target.value);
 	}
 
-	const getTest = e => {
+	const getTest = async e => {
 		e.preventDefault();
-		console.log(field);
+		const giving = await db.tasks.add({ data: incoming })
+		setIncoming(field);
+		const getting = await db.tasks.where("data").startsWith("b").sortBy("data");
+		console.log(25, field, giving, getting);
 	}
+
+	useEffect(() => {
+		async function getdata() {await db.tasks.where("data").startsWith("b").sortBy("data");}
+		// const getdata = async () => {await db.tasks.where("data").startsWith("b").sortBy("data");}
+		// const getdata = async () => {await db.tasks.where("id").equals(17);}
+		// console.log(28,JSON.stringify(getdata(),null,2));
+		console.log(34,getdata());
+	},[incoming])
 
 	return (
 		<div className="App">
 			<form onSubmit={getTest}>
-    			<input onInput={doInput} id="testfield" type="text" placeholder=" " name="field" value={field} />
+				<input onChange={doInput} id="testfield" type="text" placeholder=" " name="field" value={field} />
 			</form>
 		</div>
 	);
