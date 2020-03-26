@@ -3,8 +3,12 @@ import Dexie from "dexie";
 
 import './App.css';
 
+// Setup db "yawndb"
 const db = new Dexie("yawndb");
 db.version(1).stores({
+	// Setup table "tasks"
+	// autoinc primary key column "id"
+	// secondary key column "data"
 	tasks: "++id, data"
 })
 
@@ -33,7 +37,7 @@ function App() {
 	}
 
 	useEffect(() => {
-		// Show in console the newest db entry
+		// Show the newest db entry in console whenever "newItem" is updated.
 		console.log("Newest Item:", newItem);
 	},[newItem])	// watch state of `newItem` for changes
 
