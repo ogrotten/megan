@@ -7,31 +7,31 @@ import { useInputControl } from "./hooks/useInputControl.js";
 // import AdminListitem from "./AdminListitem";
 import ValidateFields from "./Validate";
 
-import './App.css';
+// import './App.css';
 
 const db = new Dexie("wikidb");
 db.version(1).stores({
-	pages: "++id, celebname, factoid, birthyear"
+	pages: "++id, title, body, fourth"
 })
 
 const App = (props) => {
 	// useInputControl setup, abstracting the basic form fields
-	const celebNameInput = useInputControl("");
-	const factoidInput = useInputControl("");
-	const imageUrlInput = useInputControl("");
-	const birthyear = useInputControl("");
+	const titleInput = useInputControl("");
+	const bodyInput = useInputControl("");
+	const tagInput = useInputControl("");
+	const fourthInput = useInputControl("");
 
 	// setting up local state
 	// const [alive, setAlive] = useState(true);
-	const [celebs, setCelebs] = useState([]);
+	const [allpages, setAllPages] = useState([]);
 	const [validate, setValidate] = useState([]);
 	const [dbAction, setdbAction] = useState([]);
 
-	const celebInfo = {
-		celebname: celebNameInput.value,
-		image_url: imageUrlInput.value,
-		factoid: factoidInput.value,
-		birthyear: birthyear.value,
+	const pageInfo = {
+		title: titleInput.value,
+		tags: tagInput.value,
+		body: bodyInput.value,
+		fourth: fourthInput.value,
 		// alive: alive
 	};
 
@@ -43,8 +43,8 @@ const App = (props) => {
 	const doSubmit = async e => {
 		e.preventDefault();
 		const make = []
-		Object.keys(celebInfo).forEach(el => {
-			if (celebInfo[el] === "") {
+		Object.keys(pageInfo).forEach(el => {
+			if (pageInfo[el] === "") {
 				make.push(`"${el}" field cannot be blank.`)
 			}
 		})
@@ -53,13 +53,12 @@ const App = (props) => {
 			return
 		} else {
 			setValidate(make)
-			setCelebs([celebInfo, ...celebs ])
-			console.log(57, celebInfo);
+			setAllPages([pageInfo, ...allpages ])
+			console.log(57, pageInfo);
 			// 
 			// db write here
 			//
-			let fifth = await db.pages.put(celebInfo);
-			setdbAction(fifth);
+			setdbAction(await db.pages.put(pageInfo));
 
 			// e.preventDefault();
 		}
@@ -67,19 +66,11 @@ const App = (props) => {
 
 	useEffect(() => {
 		const getList = async () => {
-			const dbRead = await db.pages.where("id").equals(dbAction).first();
-
-			console.log(71,dbRead)
 			// 
 			// db read here.
 			// 
-			// axios
-			// 	.get(`https://ogr-ft-celebdoa.herokuapp.com/api/celeb`)
-			// 	.then(response => {
-			// 		const ordered = response.data.sort((a,b) => {return a.id - b.id})
-			// 		setCelebs(ordered.reverse())
-			// 	})
-			// 	.catch(err => console.error(`>>> PROBLEM -- List > axios :: ${err}`))
+			const dbRead = await db.pages.where("id").equals(dbAction).first();
+			console.log(71,dbRead)
 		}
 		getList();
 	}, [dbAction])
@@ -93,7 +84,7 @@ const App = (props) => {
 					</Card.Header>
 					<Card.Body style={{ padding: "2rem" }}>
 						<InputGroup className="mb-3">
-							<FormControl style={{ minWidth: "50%" }} {...celebNameInput} placeholder="Celebrity" />
+							<FormControl style={{ minWidth: "50%" }} {...titleInput} placeholder="Title" />
 							{/* <ToggleButtonGroup name="alivequestion" defaultValue={true}>
 								<ToggleButton type="radio" name="alive" value={true} checked={alive === true} onChange={doAlive} variant="outline-primary" >
 									Alive
@@ -104,11 +95,11 @@ const App = (props) => {
 							</ToggleButtonGroup> */}
 						</InputGroup>
 						<InputGroup className="mb-3">
-							<FormControl {...birthyear} placeholder="Birth Year" style={{ maxWidth: "25%" }} />
-							<FormControl {...imageUrlInput} placeholder="Image URL" />
+							<FormControl {...fourthInput} placeholder="(fourth)" style={{ maxWidth: "25%" }} />
+							<FormControl {...tagInput} placeholder="Tags" />
 						</InputGroup>
 						<InputGroup className="mb-3">
-							<FormControl {...factoidInput} placeholder="Factoid" />
+							<FormControl {...bodyInput} placeholder="Body" />
 						</InputGroup>
 						<Button variant="primary" type="submit" style={{ width: "10rem" }}>
 							Add Celeb
@@ -117,8 +108,8 @@ const App = (props) => {
 				</form>
 				<ValidateFields validate={validate} />
 			</Card>
-			{/* {celebs.map(item => (
-				<AdminListitem key={celebs.indexOf(item)} item={item} />
+			{/* {allpages.map(item => (
+				<AdminListitem key={allpages.indexOf(item)} item={item} />
 			))} */}
 		</Container>
 	);
