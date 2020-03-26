@@ -11,7 +11,7 @@ import './App.css';
 
 const db = new Dexie("wikidb");
 db.version(1).stores({
-	tasks: "++id, title"
+	pages: "++id, celebname, factoid, birthyear"
 })
 
 const App = (props) => {
@@ -25,6 +25,7 @@ const App = (props) => {
 	// const [alive, setAlive] = useState(true);
 	const [celebs, setCelebs] = useState([]);
 	const [validate, setValidate] = useState([]);
+	const [dbAction, setdbAction] = useState([]);
 
 	const celebInfo = {
 		celebname: celebNameInput.value,
@@ -39,7 +40,7 @@ const App = (props) => {
 	// 	setAlive(chgAlive);
 	// };
 
-	const doSubmit = e => {
+	const doSubmit = async e => {
 		e.preventDefault();
 		const make = []
 		Object.keys(celebInfo).forEach(el => {
@@ -53,15 +54,22 @@ const App = (props) => {
 		} else {
 			setValidate(make)
 			setCelebs([celebInfo, ...celebs ])
+			console.log(57, celebInfo);
 			// 
 			// db write here
-			// 
-			e.preventDefault();
+			//
+			let fifth = await db.pages.put(celebInfo);
+			setdbAction(fifth);
+
+			// e.preventDefault();
 		}
 	}
 
 	useEffect(() => {
-		const getList = () => {
+		const getList = async () => {
+			const dbRead = await db.pages.where("id").equals(dbAction).first();
+
+			console.log(71,dbRead)
 			// 
 			// db read here.
 			// 
@@ -74,7 +82,7 @@ const App = (props) => {
 			// 	.catch(err => console.error(`>>> PROBLEM -- List > axios :: ${err}`))
 		}
 		getList();
-	}, [])
+	}, [dbAction])
 
 	return (
 		<Container>
