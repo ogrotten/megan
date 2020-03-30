@@ -4,7 +4,7 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 
 // Pages
 import Demo from "./pages/Demo"
-import Home from "./pages/Home"
+import Main from "./pages/Main"
 import Page from "./pages/Page"
 
 function App() {
@@ -12,10 +12,10 @@ function App() {
 		<BrowserRouter>
 			<div className="App">
 				<Switch>
-					<Route exact path="/" component={Home} />
+					<Route exact path="/" component={Main} />
 					<Route exact path="/demo" component={Demo} />
 					<Route exact path="/page" component={Page} />
-					<Redirect from="*" to="/" component={Home} />
+					<Redirect from="*" to="/" component={Main} />
 				</Switch>
 			</div>
 		</BrowserRouter>
