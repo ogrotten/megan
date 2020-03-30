@@ -2,16 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import { StateProvider } from "./context/Store"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		{/* <StateProvider> */}
+			<App />
+		{/* </StateProvider> */}
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
+
+/* 
+
+In order of setup usefulness for PWA.
+
+https://blog.bitsrc.io/how-to-build-a-react-progressive-web-application-pwa-b5b897df2f0a
+https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications
+https://create-react-app.dev/docs/making-a-progressive-web-app/
+
+ */
