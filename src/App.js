@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 // Pages
 import Demo from "./pages/Demo"
 import Home from "./pages/Home"
+import Page from "./pages/Page"
 
 function App() {
 	return (
@@ -13,7 +14,8 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/demo" component={Demo} />
-					<Redirect  from="*" to="/" component={Demo} />
+					<Route exact path="/page" component={Page} />
+					<Redirect from="*" to="/" component={Home} />
 				</Switch>
 			</div>
 		</BrowserRouter>
