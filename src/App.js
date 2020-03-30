@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
-import './App.css';
+// import './App.css';
 
 // Pages
 import Demo from "./pages/Demo"

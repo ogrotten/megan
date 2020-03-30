@@ -8,9 +8,9 @@ import { StateProvider } from "./context/Store"
 
 ReactDOM.render(
 	<React.StrictMode>
-		{/* <StateProvider> */}
+		<StateProvider>
 			<App />
-		{/* </StateProvider> */}
+		</StateProvider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
