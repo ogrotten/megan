@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch } from "react-router-dom"
+import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import './App.css';
 
 // Pages
@@ -9,10 +9,11 @@ import Home from "./pages/Home"
 function App() {
 	return (
 		<BrowserRouter>
-			<div>
+			<div className="App">
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/demo" component={Demo} />
+					<Redirect  from="*" to="/" component={Demo} />
 				</Switch>
 			</div>
 		</BrowserRouter>
