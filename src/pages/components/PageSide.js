@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStateLink, useStateLink } from "@hookstate/core";
+import { useStateLink } from "@hookstate/core";
 
 import { stateLink } from "../../state/hookstate"
 import { useInputControl } from "../hooks/useInputControl.js";
@@ -8,6 +8,7 @@ import database from "../../data/database";
 
 const Page = (props) => {
 	const state = useStateLink(stateLink);
+	// console.log(11,state);
 
 	// useInputControl setup, abstracting the basic form fields
 	const titleInput = useInputControl("");
@@ -18,7 +19,7 @@ const Page = (props) => {
 	// setting up local state
 	const [allpages, setAllPages] = useState([]);
 	const [validate, setValidate] = useState([]);
-	const [dbAction, setdbAction] = useState([]);
+	const [recent, setrecent] = useState(1);
 
 	const pageInfo = {
 		title: titleInput.value,
@@ -42,28 +43,41 @@ const Page = (props) => {
 			setValidate(make)
 			setAllPages([pageInfo, ...allpages])
 			console.log(44, pageInfo);
-		// 
-		// db write here
-		//
-			// setdbAction(await database.pages.put(pageInfo));
+			// 
+			// db write here
+			//
+			// async const x = database.insert(pageInfo)
+			// await setrecent(database.insert(pageInfo));			
+			// await setrecent(database.insert(pageInfo));			
+			setrecent(await database.insert(pageInfo));
 			
 			state.nested.title.set(pageInfo.title);
 			state.nested.body.set(pageInfo.body);
-			console.log("pageside > ",state.value.title, state.value.body);
+			await console.log("54 recent ", recent );
+			// console.log("54 x ", x);
 		}
 	}
 
 	useEffect(() => {
-		console.log("PageSide useEffect");
-		// const getList = async () => {
-		// // 
-		// // db read here.
-		// // 
-		// 	const dbRead = await database.pages.where("id").equals(dbAction).first();
-		// 	console.log(71, dbRead)
-		// }
-		// getList();
-	}, [dbAction])
+		console.log("60 useEffect > ", recent);
+		const m = database.get(recent)
+		console.log(m);
+
+		const getrecent = async x => {
+			// 
+			// db read here.
+			// 
+			return await database.pages.where("id").equals(x).first();
+			// console.log(66, dbRead)
+
+			// // dbRead = database.get(x);
+			// // console.log(69, dbRead)
+
+			// return dbRead
+		}
+		const x =  getrecent(recent)
+		console.log("70 useEffect > ",x);
+	}, [recent])
 	
 	// #region <input> docs
 
@@ -83,6 +97,7 @@ const Page = (props) => {
 	return (
 		<>
 			<form onSubmit={doSubmit}>
+				<p>recent: {recent}</p>
 				<input {...titleInput} placeholder="Title" style={{ minWidth: "50%" }} />
 					{/* <input {...fourthInput} placeholder="(fourth)" style={{ maxWidth: "25%" }} />
 					<input {...tagInput} placeholder="Tags" /> */}

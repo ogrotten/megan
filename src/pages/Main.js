@@ -7,7 +7,7 @@ import PageSide from "./components/PageSide"
 
 const Main = () => {
 	const state = useStateLink(stateLink);
-	console.log("main > ",state.value.title, state.value.body);
+	// console.log("main > ",state.value.title, state.value.body);
 	return (
 		<div>
 			<p>First title: {state.value.body}</p>
