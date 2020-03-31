@@ -1,11 +1,15 @@
-#DEMOS
+# **DEMOS**
 
-`/` 	: Multi Component demo. State travels, db works.
-`/demo`	: Single Component demo.
+|Path|What it is|
+|---|---|
+|`/` 	| Multi Component demo. State travels, db works.|
+|`/demo`| Single Component demo. |
 
 
+---
+## Below here is default CRA output
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
 ## Available Scripts
 
