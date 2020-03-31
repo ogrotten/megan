@@ -6,27 +6,29 @@ database.version(1).stores({
 });
 
 database.insert = (pageInfo) => {
-	console.log(9, pageInfo);
 	return database.pages.add(pageInfo)
-		.then((result) => {
-			// console.log(12, result);
-			const x = result;
-			console.log(13,x);
-			return x;
-		})
 		// .then((result) => {
-		// 	console.log(15, result);
-		// 	console.log(database.get(result));
+		// 	// console.log(12, result);
+		// 	const x = result;
+		// 	console.log(13,x);
+		// 	return x;
 		// })
-		// .catch((err) => {
-		// 	console.log("Insert error: ", err);
-		// });
+		.catch((err) => {
+			console.log(">>> DATABASE Insert error: ", err);
+		});
 }
 database.update = (pageInfo) => {
 	database.pages.put(pageInfo)
 }
-database.get = async (id) => {
-	return await database.pages.get(id);
+database.get = (id) => {
+	return database.pages.get(id)
+		.then((res) => {
+			console.log(26, res);
+			return res;
+		})
+}
+database.getall = () => {
+	return database.pages.where("id").above(-1).toArray()
 }
 
 export default database;

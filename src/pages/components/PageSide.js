@@ -6,7 +6,7 @@ import { useInputControl } from "../hooks/useInputControl.js";
 import ValidateFields from "../hooks/Validate";
 import database from "../../data/database";
 
-const Page = (props) => {
+const PageSide = (props) => {
 	const state = useStateLink(stateLink);
 	// console.log(11,state);
 
@@ -46,37 +46,28 @@ const Page = (props) => {
 			// 
 			// db write here
 			//
-			// async const x = database.insert(pageInfo)
-			// await setrecent(database.insert(pageInfo));			
-			// await setrecent(database.insert(pageInfo));			
 			setrecent(await database.insert(pageInfo));
 			
 			state.nested.title.set(pageInfo.title);
 			state.nested.body.set(pageInfo.body);
-			await console.log("54 recent ", recent );
-			// console.log("54 x ", x);
 		}
 	}
 
 	useEffect(() => {
 		console.log("60 useEffect > ", recent);
-		const m = database.get(recent)
-		console.log(m);
+		// const m = database.get(recent)
+		// console.log(m);
 
-		const getrecent = async x => {
+		const getrecent = async () => {
 			// 
 			// db read here.
 			// 
-			return await database.pages.where("id").equals(x).first();
-			// console.log(66, dbRead)
-
-			// // dbRead = database.get(x);
-			// // console.log(69, dbRead)
-
-			// return dbRead
+			// return await database.pages.where("id").equals(x).first();
+			setAllPages( await database.getall())
 		}
-		const x =  getrecent(recent)
-		console.log("70 useEffect > ",x);
+		
+		getrecent();
+		// console.log("70 useEffect > ", getrecent(recent));
 	}, [recent])
 	
 	// #region <input> docs
@@ -114,4 +105,4 @@ const Page = (props) => {
 	);
 }
 
-export default Page;
+export default PageSide;
