@@ -28,7 +28,7 @@ database.get = (id) => {
 		})
 }
 database.getall = () => {
-	return database.pages.where("id").above(-1).toArray()
+	return database.pages.where("id").above(-1)/* .reverse() */.toArray();
 }
 
 export default database;

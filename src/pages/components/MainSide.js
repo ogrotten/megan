@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStateLink, useStateLink } from "@hookstate/core";
+import { useStateLink } from "@hookstate/core";
 
 import { stateLink } from "../../state/hookstate"
 

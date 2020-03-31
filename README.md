@@ -1,3 +1,10 @@
+#DEMOS
+
+`/` 	: Multi Component demo. State travels, db works.
+`/demo`	: Single Component demo.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

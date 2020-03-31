@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { createStateLink, useStateLink } from "@hookstate/core";
+import { useStateLink } from "@hookstate/core";
 
 import {stateLink} from "../state/hookstate"
 import { useInputControl } from "./hooks/useInputControl.js";
@@ -7,7 +7,7 @@ import ValidateFields from "./hooks/Validate";
 import database from "../data/database";
 
 const Page = (props) => {
-	const state = useStateLink(stateLink);
+	// const state = useStateLink(stateLink);
 
 	// useInputControl setup, abstracting the basic form fields
 	const titleInput = useInputControl("");
