@@ -55,18 +55,16 @@ const PageSide = (props) => {
 
 	useEffect(() => {
 		console.log("60 useEffect > ", recent);
-		// const m = database.get(recent)
-		// console.log(m);
-
-		const getrecent = async () => {
+		const refreshAll = async () => {
 			// 
 			// db read here.
 			// 
 			// return await database.pages.where("id").equals(x).first();
 			setAllPages( await database.getall())
 		}
+		// setAllPages( database.getall())
 		
-		getrecent();
+		refreshAll();
 		// console.log("70 useEffect > ", getrecent(recent));
 	}, [recent])
 	
@@ -101,6 +99,10 @@ const PageSide = (props) => {
 			{/* {allpages.map(item => (
 				<AdminListitem key={allpages.indexOf(item)} item={item} />
 			))} */}
+			<hr />
+			{allpages.map(item => (
+				<p key={allpages.indexOf(item)}>{item.title}</p>
+			))}
 		</>
 	);
 }
