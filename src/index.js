@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
-import { StateProvider } from "./context/Store"
+// import { StateProvider } from "./context/Store"
 
 ReactDOM.render(
 	<React.StrictMode>
-		<StateProvider>
+		{/* <StateProvider> */}
 			<App />
-		</StateProvider>
+		{/* </StateProvider> */}
 	</React.StrictMode>,
 	document.getElementById('root')
 );
