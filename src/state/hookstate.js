@@ -2,7 +2,7 @@ import { createStateLink } from "@hookstate/core";
 
 // import database from "../data/database";
 
-const initState = {
+const initdataState = {
 	title: "Title",
 	body: "Body data",
 	modified: 0,
@@ -10,4 +10,10 @@ const initState = {
 	tags: "tags list goes here",
 };
 
-export const stateLink = createStateLink(initState)
+export const dataState = createStateLink(initdataState)
+
+const initpageState = {
+	page: "main"
+}
+
+export const pageState = createStateLink(initpageState);

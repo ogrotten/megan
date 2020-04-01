@@ -1,40 +1,50 @@
+// ===== Font Sizes
+$font-remset: 100%;
+$font-h1: 2rem;
+$font-h2: 1.7rem;
+$font-h3: 1.4rem;
+$font-h4: 1.2rem;
+$font-h5: 1rem;
+$font-p:  .88rem;
+
+
+// ===== Font Load
 @font-face {
 	font-family: "SansFont";
-	src: url("./fonts/HelveticaNeueLTStd-Roman.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-Roman.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontO";
-	src: url("./fonts/HelveticaNeueLTStd-It.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-It.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontL";
-	src: url("./fonts/HelveticaNeueLTStd-Th.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-Th.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontLO";
-	src: url("./fonts/HelveticaNeueLTStd-ThIt.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-ThIt.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontM";
-	src: url("./fonts/HelveticaNeueLTStd-Md.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-Md.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontMO";
-	src: url("./fonts/HelveticaNeueLTStd-MdIt.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-MdIt.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontB";
-	src: url("./fonts/HelveticaNeueLTStd-Blk.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-Blk.otf") format("truetype");
 }
 
 @font-face {
 	font-family: "SansFontBO";
-	src: url("./fonts/HelveticaNeueLTStd-BlkIt.otf") format("truetype"),
+	src: url("./fonts/HelveticaNeueLTStd-BlkIt.otf") format("truetype");
 }
-
