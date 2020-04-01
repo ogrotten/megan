@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
-// import './App.css';
+import 'semantic-ui-css/semantic.min.css'
+import './themes/original/style.scss';
 
 // Pages
 import Demo from "./pages/Demo"
