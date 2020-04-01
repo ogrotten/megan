@@ -4,20 +4,18 @@ import './index.css';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
-// import { StateProvider } from "./context/Store"
+import 'semantic-ui-css/semantic.min.css'
 
 ReactDOM.render(
 	<React.StrictMode>
-		{/* <StateProvider> */}
-			<App />
-		{/* </StateProvider> */}
+		<App />
 	</React.StrictMode>,
 	document.getElementById('root')
 );
 
 serviceWorker.register();
 
-/* 
+/*
 
 In order of setup usefulness for PWA.
 
