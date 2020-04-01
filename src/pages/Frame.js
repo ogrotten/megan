@@ -1,22 +1,22 @@
 import React from 'react';
 import { useStateLink } from "@hookstate/core";
-import { dataState, pageState } from "../state/hookstate"
+// import { dataState, pageState } from "../state/hookstate"
+import { pageState } from "../state/hookstate"
 import { Container, Grid } from 'semantic-ui-react'
 
 import LeftSide from "./components/LeftSide"
 import Main from "./components/Main"
-
-import PageSide from "./components/PageSide"
+import Page from "./components/Page"
 
 const Index = () => {
-	const data = useStateLink(dataState);
+	// const dataS = useStateLink(dataState);
 	const pageS = useStateLink(pageState);
 
 
 	// figure out and grab whichever component to show
 	const mainsection = {
 		"main": <Main />,
-		"side": <PageSide />
+		"page": <Page />
 	}
 
 	return (

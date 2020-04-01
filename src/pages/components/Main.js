@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { useStateLink } from "@hookstate/core";
-import { Container, Menu } from 'semantic-ui-react'
+// import React, { useState } from 'react';
+import React from 'react';
+// import { useStateLink } from "@hookstate/core";
+import { Container } from 'semantic-ui-react'
 
-import { dataState, pageState } from "../../state/hookstate"
+// import { dataState, pageState } from "../../state/hookstate"
 
 const Main = () => {
 	return (

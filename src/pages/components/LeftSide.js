@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useStateLink } from "@hookstate/core";
 import { Container, Menu } from 'semantic-ui-react'
 
-import { dataState, pageState } from "../../state/hookstate"
+import { pageState } from "../../state/hookstate"
 
 const LeftSide = () => {
-	const dataS = useStateLink(dataState);
+	// const dataS = useStateLink(dataState);
 	const pageS = useStateLink(pageState);
 
 	const [item, setItem] = useState({ activeItem: 'Show All' })
@@ -18,7 +18,7 @@ const LeftSide = () => {
 
 	return (
 		<Container fluid className="leftside">
-			<Menu secondary vertical>
+			<Menu pointing secondary vertical>
 				<Menu.Item
 					name='Show All'
 					page="main"
@@ -27,7 +27,7 @@ const LeftSide = () => {
 				/>
 				<Menu.Item
 					name='Add New'
-					page="side"
+					page="page"
 					active={item.activeItem === 'Add New'}
 					onClick={handleItemClick}
 				/>
