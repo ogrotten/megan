@@ -11,10 +11,11 @@ import { Container, Divider, Form, Input } from 'semantic-ui-react'
 const Page = () => {
 	const dataS = useStateLink(dataState);
 	const pageS = useStateLink(pageState);
+	console.log(dataS.value);
 
-	const titleInput = useInputControl("");
-	const bodyInput = useInputControl("");
-	const tagInput = useInputControl("");
+	const titleInput = useInputControl(dataS.value.title);
+	const bodyInput = useInputControl(dataS.value.body);
+	const tagInput = useInputControl(dataS.value.tags);
 	const fourthInput = useInputControl("");
 	
 	const [validate, setValidate] = useState([]);
@@ -39,14 +40,14 @@ const Page = () => {
 		<Container fluid className="main">
 			<Form>
 				<Form.Input fluid
-					name="title"
+					{...titleInput}
 					placeholder='Title'
 					size="small"
 					label={{ icon: 'text cursor' }}
 					labelPosition='left'
 				/>
 				<Input fluid
-					name="tags"
+					{...tagInput}
 					placeholder='Descriptive Tags'
 					size="mini"
 					label={{ icon: 'tag' }}
@@ -55,7 +56,7 @@ const Page = () => {
 				/>
 				<Divider />
 				<Form.TextArea
-					name="body"
+					{...bodyInput}
 					placeholder='Tell me something good . . .'
 				/>
 				<Form.Button>Submit</Form.Button>
