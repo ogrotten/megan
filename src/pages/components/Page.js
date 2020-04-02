@@ -13,23 +13,18 @@ const Page = () => {
 	const dataState = useStateLink(dataLink);
 	const pageState = useStateLink(pageLink);
 	const allState = useStateLink(allLink);
-
-	const titleInput = useInputControl(dataState.value.title);
-	const bodyInput = useInputControl(dataState.value.body);
-	const tagInput = useInputControl(dataState.value.tags);
 	// const fourthInput = useInputControl("");
-
+	
 	const [validate, setValidate] = useState([]);
-	// const [allData, setallData] = useState([]);
-	const [dbAction, setdbAction] = useState(1);
+	const [dbAction, setdbAction] = useState(pageState.get().id);
+	
+	const [pageInfo, setPageInfo] = useState({});
 
-	const pageInfo = {
-		title: titleInput.value,
-		tags: tagInput.value,
-		body: bodyInput.value
-		// fourth: fourthInput.value,
-	};
-
+	const titleInput = useInputControl(pageInfo.title);
+	const bodyInput = useInputControl(pageInfo.body);
+	const tagInput = useInputControl(pageInfo.tags);
+	
+	console.log(27, pageInfo);
 	// let value
 	// let options
 
@@ -45,28 +40,37 @@ const Page = () => {
 			setValidate(make)
 			return
 		} else {
-			setValidate(make)
-			// console.log(57, pageInfo);
+			// setValidate(make)
 			// 
 			// db write here
 			//
-			pageInfo["id"] = setdbAction(await database.pages.put(pageInfo));
-			allState.set([pageInfo, ...allState.get()])
+			database.insert(pageInfo)
+				.then((id) => {
+					setPageInfo({...pageInfo, id: id});
+					console.log(56, id);
+					setdbAction(id);
+				});
+
+			// allState.set([pageInfo, ...allState.get()])
 			// console.log(pageInfo);
 
 		}
 	}
 
 	useEffect(() => {
-		database.pages.where("id").equals(dbAction).first()
-			.then((dbRead) => {
-				console.log(67, dbRead);
-				return dbRead;
-			})
-		database.getall().then((result) => {
-			allState.set(result)
-		})
-		// console.log(74, allData)
+		// database.getall().then((result) => {
+		// 	allState.set(result)
+		// })
+
+		if (dbAction) {
+			console.log(72, dbAction);
+			database.get(dbAction)
+				.then((result) => {
+					console.log(73, result);
+					dataState.set(result)
+					setPageInfo(result)
+				})
+		}
 	}, [dbAction])
 
 

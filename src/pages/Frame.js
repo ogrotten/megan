@@ -10,7 +10,7 @@ import Page from "./components/Page"
 
 const Index = () => {
 	// const dataS = useStateLink(dataState);
-	const pageS = useStateLink(pageLink);
+	const pageState = useStateLink(pageLink);
 
 
 	// figure out and grab whichever component to show
@@ -36,7 +36,7 @@ const Index = () => {
 						<LeftSide />
 					</Grid.Column>
 					<Grid.Column width={9}>
-						{mainsection[pageS.value.page]}
+						{mainsection[pageState.value.page]}
 					</Grid.Column>
 					<Grid.Column width={3}>
 						<h4>Secondary Content</h4>

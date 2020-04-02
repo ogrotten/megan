@@ -12,7 +12,7 @@ const LeftSide = () => {
 
 	const handleItemClick = async (e, { name, page }) => {
 		// setItem({ activeItem: name })
-		pageState.set({page: page});
+		pageState.set({page: page, id: null});
 	}
 
 	useEffect(() => {

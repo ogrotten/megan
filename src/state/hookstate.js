@@ -2,21 +2,23 @@ import { createStateLink } from "@hookstate/core";
 // import database from "../data/database";
 
 
-const dataState = randdata();
-	// const initdataState = {
-	// 	title: "Title",
-	// 	body: "Body data",
-	// 	modified: 0,
-	// 	created: new Date().getTime(),
-	// 	tags: "tags list goes here",
-	// };
+// const dataState = randdata();
+const dataState = {};
+// const dataState = {
+// 	title: "Title",
+// 	body: "Body data",
+// 	modified: 0,
+// 	created: new Date().getTime(),
+// 	tags: "tags list goes here",
+// };
 
 export const dataLink = createStateLink(dataState)
 
 
 
 const pageState = {
-	page: "page"
+	page: "main",
+	id: 0
 }
 
 export const pageLink = createStateLink(pageState);
