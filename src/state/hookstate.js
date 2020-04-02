@@ -1,5 +1,5 @@
 import { createStateLink } from "@hookstate/core";
-import database from "../data/database";
+// import database from "../data/database";
 
 
 const dataState = randdata();
@@ -23,7 +23,7 @@ export const pageLink = createStateLink(pageState);
 
 
 
-const allState = [database.getall()];
+const allState = []
 
 export const allLink = createStateLink(allState);
 

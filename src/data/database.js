@@ -14,7 +14,7 @@ database.insert = (pageInfo) => {
 		// 	return x;
 		// })
 		.catch((err) => {
-			console.log(">>> DATABASE Insert error: ", err);
+			console.log(">>> DATABASE 'insert' error: ", err);
 		});
 }
 database.update = (pageInfo) => {
@@ -27,11 +27,15 @@ database.get = (id) => {
 			return res;
 		})
 }
-database.getall = async () => {
-	const geoff = await database.pages.where("id").above(-1)/* .reverse() */.toArray();
-	await console.log("geoff: ", geoff[0]);
-	return await geoff
-	// return database.pages.where("id").above(-1)/* .reverse() */.toArray();
-}
+database.getall = () => {
+	return database.pages.where("id").above(-1)/* .reverse() */.toArray()
+	// .then((result) => {
+	// 	console.log("geoff: ", result[0]);
+	// 	return result
+	// })
+	.catch((err) => {
+		console.log(">>> DATABASE 'getall' error: ", err);
+	});
 
+}
 export default database;

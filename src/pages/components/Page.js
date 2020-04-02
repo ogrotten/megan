@@ -14,16 +14,14 @@ const Page = () => {
 	const pageState = useStateLink(pageLink);
 	const allState = useStateLink(allLink);
 
-	console.log(17, allState);
-
 	const titleInput = useInputControl(dataState.value.title);
 	const bodyInput = useInputControl(dataState.value.body);
 	const tagInput = useInputControl(dataState.value.tags);
 	// const fourthInput = useInputControl("");
-	
+
 	const [validate, setValidate] = useState([]);
-	const [allData, setallData] = useState([...allState.value]);
-	const [dbAction, setdbAction] = useState([]);
+	// const [allData, setallData] = useState([]);
+	const [dbAction, setdbAction] = useState(1);
 
 	const pageInfo = {
 		title: titleInput.value,
@@ -31,9 +29,9 @@ const Page = () => {
 		body: bodyInput.value
 		// fourth: fourthInput.value,
 	};
-	
-	let value
-	let options
+
+	// let value
+	// let options
 
 	const doSubmit = async e => {
 		e.preventDefault();
@@ -53,21 +51,22 @@ const Page = () => {
 			// db write here
 			//
 			pageInfo["id"] = setdbAction(await database.pages.put(pageInfo));
-			allState.nested.set([pageInfo, ...allState])
+			allState.set([pageInfo, ...allState.get()])
 			// console.log(pageInfo);
 
 		}
 	}
-	
+
 	useEffect(() => {
-		const getList = async () => {
-			// 
-			// db read here.
-			// 
-			const dbRead = await database.pages.where("id").equals(dbAction).first();
-			// console.log(71, dbRead)
-		}
-		getList();
+		database.pages.where("id").equals(dbAction).first()
+			.then((dbRead) => {
+				console.log(67, dbRead);
+				return dbRead;
+			})
+		database.getall().then((result) => {
+			allState.set(result)
+		})
+		// console.log(74, allData)
 	}, [dbAction])
 
 
@@ -90,6 +89,7 @@ const Page = () => {
 				// transparent
 				/>
 				<Divider />
+				<ValidateFields validate={validate} />
 				<Form.TextArea
 					{...bodyInput}
 					placeholder='Tell me something good . . .'
