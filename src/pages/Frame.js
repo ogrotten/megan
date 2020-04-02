@@ -15,8 +15,8 @@ const Index = () => {
 
 	// figure out and grab whichever component to show
 	const mainsection = {
-		"main": <Main />,
-		"page": <Page />
+		"main": <Main history="props.history"/>,
+		"page": <Page history="props.history"/>
 	}
 
 	return (

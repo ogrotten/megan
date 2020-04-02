@@ -36,6 +36,7 @@ const MainItem = (props) => {
 				<Card.Content extra>
 					<Button compact floated="right" size="small" icon="edit"
 						onClick={edititem}
+						history={props.history}
 					/>
 				</Card.Content>
 			</Card>

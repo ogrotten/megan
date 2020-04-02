@@ -6,7 +6,7 @@ database.version(1).stores({
 });
 
 database.insert = (pageInfo) => {
-	return database.pages.add(pageInfo)
+	return database.pages.put(pageInfo)
 		// .then((result) => {
 		// 	// console.log(12, result);
 		// 	const x = result;
