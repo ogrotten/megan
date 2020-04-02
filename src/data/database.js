@@ -27,8 +27,11 @@ database.get = (id) => {
 			return res;
 		})
 }
-database.getall = () => {
-	return database.pages.where("id").above(-1)/* .reverse() */.toArray();
+database.getall = async () => {
+	const geoff = await database.pages.where("id").above(-1)/* .reverse() */.toArray();
+	await console.log("geoff: ", geoff[0]);
+	return await geoff
+	// return database.pages.where("id").above(-1)/* .reverse() */.toArray();
 }
 
 export default database;

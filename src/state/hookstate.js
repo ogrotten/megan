@@ -1,29 +1,32 @@
 import { createStateLink } from "@hookstate/core";
-// import "../data/megan0.json"
-// import "../data/megan1.json"
-// import "../data/megan2.json"
-
-// import database from "../data/database";
+import database from "../data/database";
 
 
-const initdataState = randdata();
-// const initdataState = {
-// 	title: "Title",
-// 	body: "Body data",
-// 	modified: 0,
-// 	created: new Date().getTime(),
-// 	tags: "tags list goes here",
-// };
+const dataState = randdata();
+	// const initdataState = {
+	// 	title: "Title",
+	// 	body: "Body data",
+	// 	modified: 0,
+	// 	created: new Date().getTime(),
+	// 	tags: "tags list goes here",
+	// };
 
-export const dataState = createStateLink(initdataState)
+export const dataLink = createStateLink(dataState)
 
 
 
-const initpageState = {
+const pageState = {
 	page: "page"
 }
 
-export const pageState = createStateLink(initpageState);
+export const pageLink = createStateLink(pageState);
+
+
+
+const allState = [database.getall()];
+
+export const allLink = createStateLink(allState);
+
 
 
 

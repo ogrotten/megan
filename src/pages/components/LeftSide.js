@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { useStateLink } from "@hookstate/core";
 import { Container, Menu } from 'semantic-ui-react'
 
-import { pageState } from "../../state/hookstate"
+import { pageLink } from "../../state/hookstate"
 
 const LeftSide = () => {
 	// const dataS = useStateLink(dataState);
-	const pageS = useStateLink(pageState);
+	const pageS = useStateLink(pageLink);
 
 	const [item, setItem] = useState({ activeItem: 'Show All' })
 
 	const handleItemClick = async (e, { name, page }) => {
 		setItem({ activeItem: name })
 		pageS.nested.page.set(page);
-		console.log(16,pageS.value.page, page, name);
 	}
 
 	return (

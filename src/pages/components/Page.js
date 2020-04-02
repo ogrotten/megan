@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStateLink } from "@hookstate/core";
-import { dataState, pageState } from "../../state/hookstate"
+
+import { dataLink, pageLink, allLink } from "../../state/hookstate"
 
 import { useInputControl } from "../hooks/useInputControl.js";
 import ValidateFields from "../hooks/Validate";
@@ -9,36 +10,70 @@ import database from "../../data/database";
 import { Container, Divider, Form, Input } from 'semantic-ui-react'
 
 const Page = () => {
-	const dataS = useStateLink(dataState);
-	const pageS = useStateLink(pageState);
-	console.log(dataS.value);
+	const dataState = useStateLink(dataLink);
+	const pageState = useStateLink(pageLink);
+	const allState = useStateLink(allLink);
 
-	const titleInput = useInputControl(dataS.value.title);
-	const bodyInput = useInputControl(dataS.value.body);
-	const tagInput = useInputControl(dataS.value.tags);
-	const fourthInput = useInputControl("");
+	console.log(17, allState);
+
+	const titleInput = useInputControl(dataState.value.title);
+	const bodyInput = useInputControl(dataState.value.body);
+	const tagInput = useInputControl(dataState.value.tags);
+	// const fourthInput = useInputControl("");
 	
 	const [validate, setValidate] = useState([]);
+	const [allData, setallData] = useState([...allState.value]);
+	const [dbAction, setdbAction] = useState([]);
 
 	const pageInfo = {
 		title: titleInput.value,
 		tags: tagInput.value,
-		body: bodyInput.value,
-		fourth: fourthInput.value,
+		body: bodyInput.value
+		// fourth: fourthInput.value,
 	};
 	
 	let value
 	let options
 
-	const handleChange = (e, { value }) => {
-		// this.setState({ value })
-		console.log(value);
+	const doSubmit = async e => {
+		e.preventDefault();
+		const make = []
+		Object.keys(pageInfo).forEach(el => {
+			if (pageInfo[el] === "") {
+				make.push(`"${el}" field cannot be blank.`)
+			}
+		})
+		if (make.length !== 0) {
+			setValidate(make)
+			return
+		} else {
+			setValidate(make)
+			// console.log(57, pageInfo);
+			// 
+			// db write here
+			//
+			pageInfo["id"] = setdbAction(await database.pages.put(pageInfo));
+			allState.nested.set([pageInfo, ...allState])
+			// console.log(pageInfo);
+
+		}
 	}
+	
+	useEffect(() => {
+		const getList = async () => {
+			// 
+			// db read here.
+			// 
+			const dbRead = await database.pages.where("id").equals(dbAction).first();
+			// console.log(71, dbRead)
+		}
+		getList();
+	}, [dbAction])
 
 
 	return (
 		<Container fluid className="main">
-			<Form>
+			<Form onSubmit={doSubmit}>
 				<Form.Input fluid
 					{...titleInput}
 					placeholder='Title'
