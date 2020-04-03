@@ -19,7 +19,6 @@ const MainItem = (props) => {
 	}, [])
 
 	return (
-		<Container fluid className="leftside">
 			<Card>
 				<Card.Content>
 					<Card.Header>{item.title}</Card.Header>
@@ -40,7 +39,6 @@ const MainItem = (props) => {
 					/>
 				</Card.Content>
 			</Card>
-		</Container>
 	)
 }
 
