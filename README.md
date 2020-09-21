@@ -1,3 +1,5 @@
+[![stats](https://github-readme-stats.vercel.app/api?username=ogrotten)](https://github.com/ogrotten)
+
 # **DEMOS**
 
 |Path|What it is|
